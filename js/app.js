@@ -1,17 +1,23 @@
 
 var React = require('react');
 
-//var DemoApp = require('./components/DemoApp.react');
+var Header = require('./components/header.react');
+var Footer = require('./components/footer.react');
+var Home   = require('./home/components/main.react');
 
-var Hello = React.createClass({
+var DemoApp = React.createClass({
     render: function() {
         return (
-            <div>Hello World!</div>
+            <div>
+                <Header />
+                <Home />
+                <Footer />
+            </div>
         );
     }
 });
 
 React.render(
-  <Hello />,
+  <DemoApp />,
   document.getElementById('demoapp')
 );

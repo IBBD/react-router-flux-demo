@@ -10,7 +10,7 @@ var Main = React.createClass({
     render: function() {
         return (
             <div>
-                Hello World!
+                Hello { this.props.name }!
             </div>
         )
     }

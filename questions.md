@@ -44,5 +44,54 @@ npm install history react-router@latest
 
 在webpack.config.js中的output属性，加上path从而指定目录
 
+## 页面访问时加载生成后的js文件目录不对
+
+地址如`http://react-flux.demo.com/1.bundle.js`， 实际地址应该是：
+
+`http://react-flux.demo.com/build/1.bundle.js`
+
+需要在output的属性内再加上`publicPath`属性
+
+## URL美化
+
+如果单纯的使用react-router的话，url的样式会变成这样：`http://www.abc.com/#/article?_k=safwf`
+
+看起来比较丑陋，需要加上history，才能变成这样：`http://www.abc.com/article`
+
+```js 
+var createHistory = require('history').createHistory;
+var useBasename   = require('history').useBasename;
+
+const history = useBasename(createHistory)({
+    basename: ''
+});
+
+// somethings else ...
+
+React.render(
+    <Router history={history} routes={rootRoute} />,
+    document.getElementById('demoapp')
+)
+```
+
+## 刷新会导致页面404的问题
+
+需要加上nginx的配置：
+
+```
+    location / {
+        location /article {
+            root        /var/www/caiyingyao/react-flux-demo;
+            try_files   /index.html /index.htm;
+        }
+        location /about {
+            root        /var/www/caiyingyao/react-flux-demo;
+            try_files   /index.html /index.htm;
+        }
+    }
+```
+
+注：配置待优化
+
 
 

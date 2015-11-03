@@ -1,0 +1,19 @@
+{
+  "name": "react-flux-demo",
+  "version": "1.0.0-rc1",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "homepage": "https://github.com/ibbd/",
+  "scripts": {
+  },
+  "authors": [
+    "Alex"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "react": "^0.14.0"
+  }
+}

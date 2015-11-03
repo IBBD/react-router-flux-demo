@@ -31,7 +31,7 @@ const rootRoute = {
 var React = require('react');
 React.render(
     <Router history={history} routes={rootRoute} />,
-    document.getElementById('demoapp')
+    document.body
 )
 
 

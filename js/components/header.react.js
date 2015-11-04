@@ -11,8 +11,8 @@ Header = React.createClass({
     render: function() {
         return (
             <div>
-                <Link to="/home">首页</Link> | {' '}
-                <Link to="/article">文章页</Link> | {' '}
+                <Link to="/">首页</Link> | {' '}
+                <Link to="/article">文章列表</Link> | {' '}
                 <Link to="/about">关于我们</Link>
             </div>
         )

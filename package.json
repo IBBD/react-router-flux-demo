@@ -19,5 +19,9 @@
     "dependencies": {
         "react": "^0.14.0",
         "react-router": "latest"
+    },
+    "devDependencies": {
+         "jsx-loader": "latest"
     }
+
 }

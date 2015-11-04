@@ -1,20 +1,18 @@
 module.exports = {
-    path: '/article',
+    path: 'article',
+
+    getChildRoutes(location, cb) {
+        require.ensure([], (require) => {
+            cb(null, [
+                require('./detail/router')
+            ])
+        })
+    },
+
     getComponent(location, cb) {
         require.ensure([], (require) => {
             console.log('router article-list');
             cb(null, require('./components/article-list-main.react'))
         })
-    },
-    childRoutes: [
-        {
-            path: '/article/:article_id',
-            getComponent(location, cb) {
-                require.ensure([], (require) => {
-                    console.log('router article');
-                    cb(null, require('./components/article-main.react'))
-                })
-            }
-        }
-    ]
+    }
 };

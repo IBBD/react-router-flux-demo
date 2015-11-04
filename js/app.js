@@ -7,7 +7,7 @@
 //import { Router } from 'react-router'
 //import { createHistory, useBasename } from 'history'
 
-var Router = require('react-router').Router;
+var Router        = require('react-router').Router;
 var createHistory = require('history').createHistory;
 var useBasename   = require('history').useBasename;
 var render        = require('react-dom').render;

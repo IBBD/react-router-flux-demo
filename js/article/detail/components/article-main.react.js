@@ -6,11 +6,13 @@
 
 var React = require('react');
 
-var ArticleListMain = React.createClass({
+var ArticleMain = React.createClass({
     render: function() {
+        console.log('render in article detail ');
+        console.log(this.props);
         return (
             <div>
-                <div>文章ID：{this.props.acticle_id}</div>
+                <div>文章ID：{this.props.params.article_id}</div>
                 <div>
                     这是文章内容。。。。
                 </div>
@@ -19,4 +21,4 @@ var ArticleListMain = React.createClass({
     }
 });
 
-module.exports = ArticleListMain;
+module.exports = ArticleMain;

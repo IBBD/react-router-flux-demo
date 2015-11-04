@@ -6,24 +6,52 @@
 
 var React = require('react');
 var Link  = require('react-router').Link;
+//var ArticleLinkList = require('./article-link-list-main.react');
 
-var ArticleMain = React.createClass({
+var ArticleListMain = React.createClass({
     render: function() {
-        return (
-            <div>
-                <div>这是文章列表页面。。。。</div>
+        console.log('render in article list');
+        console.log(this.props);
+
+        // 文章列表
+        const articles = [
+            {
+                id: 1,
+                title: '文章1'
+            },
+            {
+                id: 2,
+                title: '文章2'
+            },
+            {
+                id: 3,
+                title: '文章3'
+            },
+            {
+                id: 4,
+                title: '文章4'
+            },
+            {
+                id: 5,
+                title: '文章5'
+            },
+        ];
+
+        if (this.props.children) {
+            return this.props.children;
+        } else {
+            return (
                 <div>
-                    <Link to="/article/1" params="{{article_id: 1}}">文章1</Link> | {' '}
-                    <Link to="/article/2" params="{{article_id: 2}}">文章2</Link> | {' '}
-                    <Link to="/article/3" params="{{article_id: 3}}">文章3</Link> | {' '}
-                    <Link to="/article/4" params="{{article_id: 4}}">文章4</Link> | {' '}
-                    <Link to="/article/5" params="{{article_id: 5}}">文章5</Link> | {' '}
-                    <Link to="/article/6" params="{{article_id: 6}}">文章6</Link> | {' '}
-                    <Link to="/article/7" params="{{article_id: 7}}">文章7</Link> | {' '}
+                    <div>这是文章列表页面。。。。</div>
+                    <div>
+                    {articles.map(function(art) {
+                        return (<Link to={`/article/${art.id}`}>{art.title}</Link>)
+                    })}
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
     }
 });
 
-module.exports = ArticleMain;
+module.exports = ArticleListMain;

@@ -10,6 +10,7 @@
 var Router = require('react-router').Router;
 var createHistory = require('history').createHistory;
 var useBasename   = require('history').useBasename;
+var render        = require('react-dom').render;
 
 const history = useBasename(createHistory)({
     basename: ''
@@ -29,7 +30,7 @@ const rootRoute = {
 };
 
 var React = require('react');
-React.render(
+render(
     <Router history={history} routes={rootRoute} />,
     document.body
 )

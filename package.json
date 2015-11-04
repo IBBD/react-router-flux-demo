@@ -18,6 +18,7 @@
     },
     "dependencies": {
         "react": "^0.14.0",
-        "react-router": "latest"
+        "react-router": "latest",
+        "react-dom": "latest"
     }
 }

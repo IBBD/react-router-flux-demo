@@ -97,6 +97,19 @@ React.render(
 
 暂时估计是页面打开比较久引发的。
 
+------------------
 
+下面开始优化React-router的demo，主要优化目录，增加子路由
+
+------------------
+
+## 路由编译错误 
+
+ERROR in ./js/article/router.js
+Module build failed: Error: Parse Error: Line 4: Unexpected identifier
+
+对应的文件写少了一个逗号 
+
+## 子模块的路由路径不对
 
 

@@ -4,7 +4,14 @@ module.exports = {
     getChildRoutes(location, cb) {
         require.ensure([], (require) => {
             cb(null, [
-                require('./detail/router')
+                {
+                    path: 'create',
+                    component: require('./components/create.react')
+                },
+                {
+                    path: ':article_id',
+                    component: require('./components/detail.react')
+                }
             ])
         })
     },
@@ -12,7 +19,7 @@ module.exports = {
     getComponent(location, cb) {
         require.ensure([], (require) => {
             console.log('router article-list');
-            cb(null, require('./components/article-list-main.react'))
+            cb(null, require('./components/index.react'))
         })
     }
 };

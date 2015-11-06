@@ -42,6 +42,9 @@ var ArticleListMain = React.createClass({
         } else {
             return (
                 <div>
+                    <div>
+                        <Link to="/article/create">添加文章</Link>
+                    </div>
                     <div>这是文章列表页面。。。。</div>
                     <div>
                     {articles.map(function(art) {

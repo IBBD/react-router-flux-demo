@@ -155,5 +155,12 @@ location / {
     <script src="/build/bundle.js"></script>
 ```
 
+------------------ 
+
+React-router Demo V2完成，主要是增加子路由及刷新的路径问题
+
+------------------ 
+
+
 
 

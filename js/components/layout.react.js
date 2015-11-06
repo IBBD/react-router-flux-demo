@@ -11,6 +11,8 @@ var Home   = require('../home/components/main.react');
 
 var Layout = React.createClass({
     render: function() {
+        console.log('in layout');
+        console.log(this.props);
         return (
             <div>
                 <Header />

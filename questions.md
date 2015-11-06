@@ -112,4 +112,48 @@ Module build failed: Error: Parse Error: Line 4: Unexpected identifier
 
 ## 子模块的路由路径不对
 
+nginx配置修改成这样
+
+```
+location / {
+    try_files   $uri /index.html /var/www/caiyingyao/react-flux-demo/index.html;
+    access_log  /var/log/nginx/react-flux.demo.com.access.log;
+    error_log   /var/log/nginx/react-flux.demo.com.error.log;
+}
+```
+
+对应的render输出改成了这样：
+
+```js
+        if (this.props.children) {
+            return this.props.children;
+        } else {
+            return (
+                <div>
+                    <div>这是文章列表页面。。。。</div>
+                    <div>
+                    {articles.map(function(art) {
+                        return (<Link to={`/article/${art.id}`}>{art.title}</Link>)
+                    })}
+                    </div>
+                </div>
+            );
+        }
+```
+
+## 页面在浏览器层面刷新时导致404
+
+原因是js引用路径问题，原来引用：
+
+```html 
+    <script src="build/bundle.js"></script>
+```
+
+当去到子页面的时候，同样是加载这个html文件，但是当前目录就不对了，应该改为绝对路径：
+
+```html 
+    <script src="/build/bundle.js"></script>
+```
+
+
 

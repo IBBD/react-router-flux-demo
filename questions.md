@@ -143,7 +143,7 @@ location / {
 
 ## 页面在浏览器层面刷新时导致404
 
-原因是js引用路径问题，原来引用：
+报错信息：`webpack Uncaught SyntaxError: Unexpected token <`, 这个信息比较迷惑人，其实原因是js引用路径问题，原来引用：
 
 ```html 
     <script src="build/bundle.js"></script>
@@ -160,6 +160,27 @@ location / {
 React-router Demo V2完成，主要是增加子路由及刷新的路径问题
 
 ------------------ 
+
+## 规范目录遇到的问题
+
+规范目录是要实现：
+
+- 增加public目录作为网站的根目录 
+- index.html转移到public 
+- 编译后的js文件放到public目录下的build目录
+
+浏览器会报和上一个问题一样的错误，原因就是引用路径不对，可以查看nginx的错误日志。修改webpack.config.js文件：
+
+```
+    output: {
+        path: 'public/build',
+        filename: 'bundle.js',
+        publicPath: '/build/'
+    },
+```
+
+注意：配置里面的publicPath是相对于网站跟目录的。
+
 
 
 

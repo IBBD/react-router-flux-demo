@@ -1,29 +1,28 @@
 {
-    "name": "react-flux-react-router-demo",
-    "version": "1.0.0-rc1",
-    "description": "基于React，React-Router，Flux的demo集合",
-    "repository": {
-        "type": "git",
-        "url": ""
-    },
-    "homepage": "https://github.com/ibbd/",
-    "scripts": {
-    },
-    "authors": [
-        "Alex"
-    ],
-    "license": "MIT",
-    "peerDependencies": {
-        "history": "^1.12.0"
-    },
-    "dependencies": {
-        "react": "^0.14.0",
-        "react-router": "latest",
-        "react-dom": "latest",
-        "react-bootstrap": "latest"
-    },
-    "devDependencies": {
-         "jsx-loader": "latest"
-    }
-
+  "name": "react-flux-react-router-demo",
+  "version": "1.0.0-rc1",
+  "description": "基于React，React-Router，Flux的demo集合",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "homepage": "https://github.com/ibbd/",
+  "scripts": {},
+  "authors": [
+    "Alex"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "history": "^1.12.0"
+  },
+  "dependencies": {
+    "react": "^0.14.0",
+    "react-router": "latest",
+    "react-dom": "latest",
+    "react-bootstrap": "latest",
+    "reflux": "0.2.*"
+  },
+  "devDependencies": {
+    "jsx-loader": "^0.13.2"
+  }
 }

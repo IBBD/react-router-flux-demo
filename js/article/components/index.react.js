@@ -4,38 +4,18 @@
  *
  */
 
-var React = require('react');
-var Link  = require('react-router').Link;
-//var ArticleLinkList = require('./article-link-list-main.react');
+var React        = require('react');
+var Link         = require('react-router').Link;
+var ArticleStore = require('../stores/article-stores');
 
 var ArticleListMain = React.createClass({
     render: function() {
         console.log('render in article list');
         console.log(this.props);
+        console.log(ArticleStore.getAll());
 
         // 文章列表
-        const articles = [
-            {
-                id: 1,
-                title: '文章1'
-            },
-            {
-                id: 2,
-                title: '文章2'
-            },
-            {
-                id: 3,
-                title: '文章3'
-            },
-            {
-                id: 4,
-                title: '文章4'
-            },
-            {
-                id: 5,
-                title: '文章5'
-            },
-        ];
+        const articles = ArticleStore.getAll();
 
         if (this.props.children) {
             return this.props.children;

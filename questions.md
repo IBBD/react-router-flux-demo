@@ -181,7 +181,22 @@ React-router Demo V2完成，主要是增加子路由及刷新的路径问题
 
 注意：配置里面的publicPath是相对于网站跟目录的。
 
+## 一个看是webpack内部的错误
 
+```
+ERROR in (webpack)/~/node-libs-browser/~/timers-browserify/main.js
+Module not found: Error: Cannot resolve module 'jsx-loader' in /usr/local/lib/node_modules/webpack/node_modules/node-libs-browser/node_modules/timers-browserify
+ @ (webpack)/~/node-libs-browser/~/timers-browserify/main.js 1:0-116 1:0-116
+```
 
+网上有类似的问题：http://stackoverflow.com/questions/26112994/why-am-i-getting-a-jsx-loader-error-when-i-try-to-use-react-router-with-webpack
+
+执行`npm install --save-dev jsx-loader`, 错误信息还是不变。正确的解决方法是：
+
+```
+npm install webpack 
+```
+
+把webpack安装到本地。
 
 

@@ -11,6 +11,14 @@ module.exports = {
                 {
                     path: ':article_id',
                     component: require('./components/detail.react')
+                },
+                {
+                    path: 'update/:article_id',
+                    component: require('./components/update.react')
+                },
+                {
+                    path: 'remove/:article_id',
+                    component: require('./components/remove.react')
                 }
             ])
         })

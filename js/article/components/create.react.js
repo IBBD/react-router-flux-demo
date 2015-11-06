@@ -39,7 +39,8 @@ var ArticleCreate = React.createClass({
     _submitNewArticle: function() {
         console.log('_submitNewArticle');
         console.log(this);
-        ArticleActions.create(this.state.title, this.state.body);
+        var status = ArticleActions.create(this.state.title, this.state.body);
+        console.log('操作结果', status);
     }
 });
 

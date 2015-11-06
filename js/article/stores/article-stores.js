@@ -21,6 +21,10 @@ var ArticleStore = Reflux.createStore({
         return _articles;
     },
 
+    /**
+     *
+     * @param  {int}    id
+     */
     getOne: function(id) {
         if ( 'number' !== typeof id ) {
             id = id * 1;
@@ -32,8 +36,13 @@ var ArticleStore = Reflux.createStore({
      * 创建一篇文章
      * @param  {string} title
      * @param  {string} body
+     * @return {bool}
      */
     onCreate: function(title, body) {
+        if (body.length < 10) {
+            return false;
+        }
+
         var id = _articles.length;
         _articles.push({
             id: id,
@@ -44,11 +53,13 @@ var ArticleStore = Reflux.createStore({
         console.log('onCreate:');
         console.log(_articles);
         console.log(this);
+
+        return true;
     },
 
     /**
      *  更新文章
-     * @param  {string} id
+     * @param  {int}    id
      * @param  {string} title
      * @param  {string} body
      */
@@ -67,7 +78,7 @@ var ArticleStore = Reflux.createStore({
 
     /**
      * Delete
-     * @param  {string} id
+     * @param  {int}    id
      */
     onRemove: function(id) {
         if ( 'number' !== typeof id ) {
@@ -83,7 +94,7 @@ var ArticleStore = Reflux.createStore({
 
     /**
      * read
-     * @param  {string} id
+     * @param  {int}    id
      */
     onRead: function(id) {
         if ( 'number' !== typeof id ) {

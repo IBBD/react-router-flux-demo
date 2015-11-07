@@ -6,13 +6,40 @@
 
 var React          = require('react');
 var Link           = require('react-router').Link;
-var ArticleActions = require('../actions');
+var ArticleActions = require('../actions/actions');
 var ArticleStores  = require('../stores/article-stores');
+
 
 var ArticleCreate = React.createClass({
 
     getInitialState: function() {
-        return {title: "", body: ""}
+        console.log('init');
+        var state = {
+            title: "",
+            body: "",
+            is_creating: false
+        };
+        console.log(state);
+        return state;
+    },
+
+    // Listen for changes
+    componentDidMount: function() {
+        console.log('componentDidMount');
+        ArticleStores.addChangeListener(this._onChange);
+    },
+
+    // Unbind change listener
+    componentWillUnmount: function() {
+        console.log('componentWillUnmount');
+        ArticleStores.removeChangeListener(this._onChange);
+    },
+
+    // Update view state when change event is received
+    _onChange: function() {
+        console.log('onChange');
+        this.componentWillUnmount();
+        window.location.href = '/article';
     },
 
     render: function() {
@@ -37,11 +64,15 @@ var ArticleCreate = React.createClass({
     },
 
     _submitNewArticle: function() {
+        if (true === this.state.is_creating) {
+            console.log('is_creating status is error');
+            return false;
+        }
         console.log('_submitNewArticle');
         console.log(this);
-        var status = ArticleActions.create(this.state.title, this.state.body);
-        console.log('操作结果');
-        console.log(status);
+        this.setState({is_creating: true});
+        ArticleActions.create(this.state.title, this.state.body);
+        this.setState({is_creating: false});
     }
 });
 

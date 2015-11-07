@@ -8,7 +8,7 @@ var React        = require('react');
 var Link         = require('react-router').Link;
 var ArticleStore = require('../stores/article-stores');
 
-var ArticleListMain = React.createClass({
+var ArticleIndex = React.createClass({
     render: function() {
         console.log('render in article list');
         console.log(this.props);
@@ -37,4 +37,4 @@ var ArticleListMain = React.createClass({
     }
 });
 
-module.exports = ArticleListMain;
+module.exports = ArticleIndex;

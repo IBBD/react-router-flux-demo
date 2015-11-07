@@ -1,21 +1,39 @@
 /**
  *
- * 文章属性：id, title, body, read_times
+ * 文章的数据模型：id, title, body, read_times
  *
  * @author Alex
  */
 
 
-var Reflux           = require('reflux');
+var assign           = require('object-assign');
 var EventEmitter     = require('events').EventEmitter;
-var ArticleActions   = require('../actions');
+var AppDispatcher    = require('../../common/dispatcher');
+var ArticleConstants = require('../config/constants');
 
+var CHANGE_EVENT = 'change';
 
-var ArticleStore = Reflux.createStore({
+var ArticleStore = assign({}, EventEmitter.prototype, {
 
-    listenables: [ArticleActions],
+    _articles: [{id:0, title: 'title', content: 'this is content...', read_times: 0}],
 
-    _articles: [],
+    emitChange: function() {
+        this.emit(CHANGE_EVENT);
+    },
+
+    /**
+     * @param {function} callback
+     */
+    addChangeListener: function(callback) {
+        this.on(CHANGE_EVENT, callback);
+    },
+
+    /**
+     * @param {function} callback
+     */
+    removeChangeListener: function(callback) {
+        this.removeListener(CHANGE_EVENT, callback);
+    },
 
     getAll: function() {
         return this._articles;
@@ -38,7 +56,7 @@ var ArticleStore = Reflux.createStore({
      * @param  {string} body
      * @return {bool}
      */
-    onCreate: function(title, body) {
+    create: function(title, body) {
         if (body.length < 10) {
             return false;
         }
@@ -53,8 +71,8 @@ var ArticleStore = Reflux.createStore({
         console.log('onCreate:');
         console.log(this._articles);
         console.log(this);
-        create.completed(true);
 
+        this.emitChange();
         return true;
     },
 
@@ -64,7 +82,7 @@ var ArticleStore = Reflux.createStore({
      * @param  {string} title
      * @param  {string} body
      */
-    onUpdate: function(id, title, body) {
+    update: function(id, title, body) {
         if ( 'number' !== typeof id ) {
             id = id * 1;
         }
@@ -74,6 +92,7 @@ var ArticleStore = Reflux.createStore({
         }
         this._articles[id].title = title;
         this._articles[id].body = body;
+        this.emitChange();
         return true;
     },
 
@@ -81,7 +100,7 @@ var ArticleStore = Reflux.createStore({
      * Delete
      * @param  {int}    id
      */
-    onRemove: function(id) {
+    destroy: function(id) {
         if ( 'number' !== typeof id ) {
             id = id * 1;
         }
@@ -90,6 +109,7 @@ var ArticleStore = Reflux.createStore({
             return false;
         }
         delete this._articles[id];
+        this.emitChange();
         return true;
     },
 
@@ -97,7 +117,7 @@ var ArticleStore = Reflux.createStore({
      * read
      * @param  {int}    id
      */
-    onRead: function(id) {
+    show: function(id) {
         if ( 'number' !== typeof id ) {
             id = id * 1;
         }
@@ -109,6 +129,41 @@ var ArticleStore = Reflux.createStore({
         return true;
     }
 
+});
+
+// Register callback to handle all updates
+AppDispatcher.register(function(action) {
+    var content, title, id;
+
+    switch(action.actionType) {
+        case ArticleConstants.ARTICLE_CREATE:
+            content = action.content.trim();
+            title = action.title.trim();
+            console.log('register ', action.actionType, title, content);
+            if (title !== '' && content !== '') {
+                ArticleStore.create(title, content);
+            }
+            break;
+
+        case ArticleConstants.ARTICLE_UPDATE:
+            content = action.content.trim();
+            title = action.title.trim();
+            if (title !== '' && content !== '') {
+                ArticleStore.update(action.id, title, content);
+            }
+            break;
+
+        case ArticleConstants.ARTICLE_DESTROY:
+            ArticleStore.destroy(action.id);
+            break;
+
+        case ArticleConstants.ARTICLE_SHOW:
+            ArticleStore.show();
+            break;
+
+        default:
+            // no op
+    }
 });
 
 module.exports = ArticleStore;

@@ -7,7 +7,7 @@
 
 var React          = require('react');
 var Link           = require('react-router').Link;
-var ArticleActions = require('../actions');
+var ArticleActions = require('../actions/actions');
 var ArticleStores  = require('../stores/article-stores');
 
 var ArticleUpdate = React.createClass({

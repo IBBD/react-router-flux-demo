@@ -6,7 +6,7 @@
 
 var React = require('react');
 
-var Main = React.createClass({
+var Index = React.createClass({
     render: function() {
         return (
             <div>
@@ -16,4 +16,4 @@ var Main = React.createClass({
     }
 });
 
-module.exports = Main;
+module.exports = Index;

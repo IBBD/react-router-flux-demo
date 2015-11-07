@@ -11,14 +11,14 @@ var EventEmitter     = require('events').EventEmitter;
 var ArticleActions   = require('../actions');
 
 
-var _articles = [];
-
 var ArticleStore = Reflux.createStore({
 
     listenables: [ArticleActions],
 
+    _articles: [],
+
     getAll: function() {
-        return _articles;
+        return this._articles;
     },
 
     /**
@@ -29,7 +29,7 @@ var ArticleStore = Reflux.createStore({
         if ( 'number' !== typeof id ) {
             id = id * 1;
         }
-        return _articles[id];
+        return this._articles[id];
     },
 
     /**
@@ -43,16 +43,17 @@ var ArticleStore = Reflux.createStore({
             return false;
         }
 
-        var id = _articles.length;
-        _articles.push({
+        var id = this._articles.length;
+        this._articles.push({
             id: id,
             title: title,
             body: body,
             read_times: 0
         });
         console.log('onCreate:');
-        console.log(_articles);
+        console.log(this._articles);
         console.log(this);
+        create.completed(true);
 
         return true;
     },
@@ -67,12 +68,12 @@ var ArticleStore = Reflux.createStore({
         if ( 'number' !== typeof id ) {
             id = id * 1;
         }
-        if ( 'undefined' === typeof _articles[id] ) {
+        if ( 'undefined' === typeof this._articles[id] ) {
             console.log('update error')
             return false;
         }
-        _articles[id].title = title;
-        _articles[id].body = body;
+        this._articles[id].title = title;
+        this._articles[id].body = body;
         return true;
     },
 
@@ -84,11 +85,11 @@ var ArticleStore = Reflux.createStore({
         if ( 'number' !== typeof id ) {
             id = id * 1;
         }
-        if ( 'undefined' === typeof _articles[id] ) {
+        if ( 'undefined' === typeof this._articles[id] ) {
             console.log('update error')
             return false;
         }
-        delete _articles[id];
+        delete this._articles[id];
         return true;
     },
 
@@ -100,11 +101,11 @@ var ArticleStore = Reflux.createStore({
         if ( 'number' !== typeof id ) {
             id = id * 1;
         }
-        if ( 'undefined' === typeof _articles[id] ) {
+        if ( 'undefined' === typeof this._articles[id] ) {
             console.log('update error')
             return false;
         }
-        _articles[id].read_times++;
+        this._articles[id].read_times++;
         return true;
     }
 

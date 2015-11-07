@@ -6,8 +6,7 @@
 var React  = require('react');
 var Header = require('./header.react');
 var Footer = require('./footer.react');
-var Home   = require('../home/components/main.react');
-//var render = require('react-dom').render;
+var Home   = require('../../home/components/index.react');
 
 var Layout = React.createClass({
     render: function() {

@@ -20,7 +20,7 @@ const rootRoute = {
     component: 'div',
     childRoutes: [ {
         path: '/',
-        component: require('./components/layout.react'),
+        component: require('./common/components/layout.react'),
         childRoutes: [
             //require('./home/router'),
             require('./article/router'),

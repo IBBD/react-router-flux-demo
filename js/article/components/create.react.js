@@ -38,8 +38,8 @@ var ArticleCreate = React.createClass({
     // Update view state when change event is received
     _onChange: function() {
         console.log('onChange');
-        this.componentWillUnmount();
-        window.location.href = '/article';
+        //this.componentWillUnmount();
+        //window.location.href = '/article';
     },
 
     render: function() {

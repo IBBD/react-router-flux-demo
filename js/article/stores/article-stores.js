@@ -13,9 +13,9 @@ var ArticleConstants = require('../config/constants');
 
 var CHANGE_EVENT = 'change';
 
-var ArticleStore = assign({}, EventEmitter.prototype, {
+var _articles = [{id:0, title: 'title', content: 'this is content...', read_times: 0}];
 
-    _articles: [{id:0, title: 'title', content: 'this is content...', read_times: 0}],
+var ArticleStore = assign({}, EventEmitter.prototype, {
 
     emitChange: function() {
         this.emit(CHANGE_EVENT);
@@ -36,7 +36,7 @@ var ArticleStore = assign({}, EventEmitter.prototype, {
     },
 
     getAll: function() {
-        return this._articles;
+        return _articles;
     },
 
     /**
@@ -47,89 +47,89 @@ var ArticleStore = assign({}, EventEmitter.prototype, {
         if ( 'number' !== typeof id ) {
             id = id * 1;
         }
-        return this._articles[id];
-    },
+        return _articles[id];
+    }
+});
 
-    /**
-     * 创建一篇文章
-     * @param  {string} title
-     * @param  {string} body
-     * @return {bool}
-     */
-    create: function(title, body) {
-        if (body.length < 10) {
-            return false;
-        }
 
-        var id = this._articles.length;
-        this._articles.push({
-            id: id,
-            title: title,
-            body: body,
-            read_times: 0
-        });
-        console.log('onCreate:');
-        console.log(this._articles);
-        console.log(this);
-
-        this.emitChange();
-        return true;
-    },
-
-    /**
-     *  更新文章
-     * @param  {int}    id
-     * @param  {string} title
-     * @param  {string} body
-     */
-    update: function(id, title, body) {
-        if ( 'number' !== typeof id ) {
-            id = id * 1;
-        }
-        if ( 'undefined' === typeof this._articles[id] ) {
-            console.log('update error')
-            return false;
-        }
-        this._articles[id].title = title;
-        this._articles[id].body = body;
-        this.emitChange();
-        return true;
-    },
-
-    /**
-     * Delete
-     * @param  {int}    id
-     */
-    destroy: function(id) {
-        if ( 'number' !== typeof id ) {
-            id = id * 1;
-        }
-        if ( 'undefined' === typeof this._articles[id] ) {
-            console.log('update error')
-            return false;
-        }
-        delete this._articles[id];
-        this.emitChange();
-        return true;
-    },
-
-    /**
-     * read
-     * @param  {int}    id
-     */
-    show: function(id) {
-        if ( 'number' !== typeof id ) {
-            id = id * 1;
-        }
-        if ( 'undefined' === typeof this._articles[id] ) {
-            console.log('update error')
-            return false;
-        }
-        this._articles[id].read_times++;
-        return true;
+/**
+ * 创建一篇文章
+ * @param  {string} title
+ * @param  {string} body
+ * @return {bool}
+ */
+function create(title, body) {
+    if (body.length < 10) {
+        return false;
     }
 
-});
+    var id = _articles.length;
+    _articles.push({
+        id: id,
+        title: title,
+        body: body,
+        read_times: 0
+    });
+    console.log('onCreate:');
+    console.log(_articles);
+    console.log(this);
+
+    ArticleStore.emitChange();
+    return true;
+}
+
+/**
+ *  更新文章
+ * @param  {int}    id
+ * @param  {string} title
+ * @param  {string} body
+ */
+function update(id, title, body) {
+    if ( 'number' !== typeof id ) {
+        id = id * 1;
+    }
+    if ( 'undefined' === typeof _articles[id] ) {
+        console.log('update error')
+            return false;
+    }
+    _articles[id].title = title;
+    _articles[id].body = body;
+    ArticleStore.emitChange();
+    return true;
+}
+
+/**
+ * Delete
+ * @param  {int}    id
+ */
+function destroy(id) {
+    if ( 'number' !== typeof id ) {
+        id = id * 1;
+    }
+    if ( 'undefined' === typeof _articles[id] ) {
+        console.log('update error')
+            return false;
+    }
+    delete _articles[id];
+    ArticleStore.emitChange();
+    return true;
+}
+
+/**
+ * read
+ * @param  {int}    id
+ */
+function show(id) {
+    if ( 'number' !== typeof id ) {
+        id = id * 1;
+    }
+    if ( 'undefined' === typeof _articles[id] ) {
+        console.log('update error');
+        return false;
+    }
+    _articles[id].read_times++;
+    return true;
+}
 
 // Register callback to handle all updates
 AppDispatcher.register(function(action) {
@@ -141,7 +141,7 @@ AppDispatcher.register(function(action) {
             title = action.title.trim();
             console.log('register ', action.actionType, title, content);
             if (title !== '' && content !== '') {
-                ArticleStore.create(title, content);
+                create(title, content);
             }
             break;
 
@@ -149,16 +149,16 @@ AppDispatcher.register(function(action) {
             content = action.content.trim();
             title = action.title.trim();
             if (title !== '' && content !== '') {
-                ArticleStore.update(action.id, title, content);
+                update(action.id, title, content);
             }
             break;
 
         case ArticleConstants.ARTICLE_DESTROY:
-            ArticleStore.destroy(action.id);
+            destroy(action.id);
             break;
 
         case ArticleConstants.ARTICLE_SHOW:
-            ArticleStore.show();
+            show();
             break;
 
         default:

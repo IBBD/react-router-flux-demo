@@ -22,7 +22,7 @@ const rootRoute = {
         path: '/',
         component: require('./common/components/layout.react'),
         childRoutes: [
-            //require('./home/router'),
+            require('./auth/router'),
             require('./article/router'),
             require('./about/router')
         ]

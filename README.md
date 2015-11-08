@@ -67,5 +67,44 @@ ui组件的文件命名如`index.react.js`
 
 在前一个demo的基础上，增加Flux规范数据流，及进一步完善目录结构。
 
+目录规范：
+
+```
+/js js主目录
+    /common   公共模块目录
+        /components    公共组件
+            layout.react.js     
+            header.react.js     
+            footer.react.js     
+        /config        公共配置文件目录
+            constants.js    常量配置
+        /stores 
+            user-stores.js  用户stores
+        dispatcher.js    全站公用的dispatcher 
+    /article  功能模块目录，其他功能模块类似
+        /components    组件目录
+            index.react.js     
+        /actions       actions文件目录
+        /stores        存储目录(Reflux store)
+        /config        功能模块的配置文件
+            constants.js    常量配置
+        router.js      功能模块的路由文件
+        actions.js     事件动作文件，对应Reflux Actions
+    app.js    主入口js
+/public    网站根目录
+    /build        编译后的文件目录
+    index.html    网站入口文件
+/nginx     nginx配置文件
+/node-modules 
+package.json 
+webpack.config.js 
+```
+
+## React-bootstrap
+
+在前一个demo的基础上，加入UI
+
+
+
 
 

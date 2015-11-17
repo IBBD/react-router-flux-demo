@@ -105,7 +105,7 @@ webpack.config.js
 
 在前一个demo的基础上，加入UI
 
-
-
+## Apache 配置
+将.htaccess赋值到index.html同级目录下
 
 

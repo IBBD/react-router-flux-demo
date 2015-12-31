@@ -28,7 +28,7 @@ var ArticleIndex = React.createClass({
                     <div>这是文章列表页面。。。。</div>
                     <div>
                     {articles.map(function(art) {
-                        return (<Link to={`/article/${art.id}`}>{art.title}</Link>)
+                        return (<Link key={art.id} to={`/article/${art.id}`}>{art.title}</Link>)
                     })}
                     </div>
                 </div>

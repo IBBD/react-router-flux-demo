@@ -9,13 +9,9 @@
 
 var Router        = require('react-router').Router;
 var createHistory = require('history').createHistory;
-//var createBrowserHistory = require('history').createBrowserHistory;
+var browserHistory = require('react-router').browserHistory;
 var useBasename   = require('history').useBasename;
 var render        = require('react-dom').render;
-
-const history = useBasename(createHistory)({
-    basename: ''
-});
 
 const rootRoute = {
     component: 'div',
@@ -32,7 +28,7 @@ const rootRoute = {
 
 var React = require('react');
 render(
-    <Router history={history} routes={rootRoute} />,
+    <Router history={browserHistory} routes={rootRoute} />,
     document.getElementById('ibbd')
 )
 
